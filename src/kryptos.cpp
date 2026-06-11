@@ -19,6 +19,7 @@
 #include <string>
 #include <limits>
 #include "caesar.h"
+#include "vigenere.h"
 #include "colors.h"
 
 using namespace std;
@@ -35,14 +36,15 @@ int main() {
     while (true) {
         cout << color(TITLE) << "\nSelect what type of encryption or decryption you want:\n" << color(RESET); 
         cout << "1. Caesar\n";
-        cout << "2. Exit\n\n";
+        cout << "2. Vigenère\n";
+        cout << "3. Exit\n\n";
         cout << color(PROMPT) << "> " << color(RESET);
 
         // Validate that the input is an integer within the permitted menu range.
-        if (cin >> option && (option >= 1 && option <= 2)) {
+        if (cin >> option && (option >= 1 && option <= 3)) {
 
             // Terminate the execution loop and close the application.
-            if (option == 2) {
+            if (option == 3) {
                 cout << color(MUTED) << "\nEnding program...\n" << color(RESET);
                 break;
             }
@@ -50,6 +52,8 @@ int main() {
             // Launch the Caesar Cipher submenu module.
             if (option == 1) {
                 cout << caesar() + "\n\n";
+            } else if (option == 2) {
+                cout << vigenere() + "\n\n";
             }
 
         } else {
