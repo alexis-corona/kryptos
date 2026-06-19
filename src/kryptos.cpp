@@ -20,6 +20,7 @@
 #include <limits>
 #include "caesar.h"
 #include "vigenere.h"
+#include "rot13.h"
 #include "colors.h"
 
 using namespace std;
@@ -37,14 +38,15 @@ int main() {
         cout << color(TITLE) << "\nSelect what type of encryption or decryption you want:\n" << color(RESET); 
         cout << "1. Caesar\n";
         cout << "2. Vigenère\n";
-        cout << "3. Exit\n\n";
+        cout << "3. ROT13\n";
+        cout << "4. Exit\n\n";
         cout << color(PROMPT) << "> " << color(RESET);
 
         // Validate that the input is an integer within the permitted menu range.
-        if (cin >> option && (option >= 1 && option <= 3)) {
+        if (cin >> option && (option >= 1 && option <= 4)) {
 
             // Terminate the execution loop and close the application.
-            if (option == 3) {
+            if (option == 4) {
                 cout << color(MUTED) << "\nEnding program...\n" << color(RESET);
                 break;
             }
@@ -54,6 +56,8 @@ int main() {
                 cout << caesar() + "\n\n";
             } else if (option == 2) {
                 cout << vigenere() + "\n\n";
+            } else if (option == 3) {
+                cout << rot13() + "\n\n";
             }
 
         } else {
