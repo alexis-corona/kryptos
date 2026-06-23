@@ -6,7 +6,7 @@
  * cyclic manner.
  *
  * Author: Alexis Corona
- * Version: Development
+ * Version: 1.0.0
  */
 
 #ifndef VIGENERE_H

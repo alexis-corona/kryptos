@@ -7,7 +7,7 @@
  * The user can choose to either encrypt or decrypt text.
  *
  * Author: Alexis Corona
- * Version: Development
+ * Version: 1.0.0
  */
 
 #include <iostream>

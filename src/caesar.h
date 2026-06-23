@@ -5,7 +5,7 @@
  * This cipher shifts each character of the text by a given number of positions.
  *
  * Author: Alexis Corona
- * Version: Development
+ * Version: 1.0.0
  */
 
 #ifndef CAESAR_H
