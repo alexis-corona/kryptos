@@ -38,7 +38,7 @@ string caesarDecrypt(const string& text, int shift);
  * @return std::string The status message or processing results.
  */
 string caesar() {
-    string text, stringShift;
+    string text, stringShift, stringOption;
     int option, shift;
 
     // Submenu interaction loop.
@@ -48,22 +48,29 @@ string caesar() {
         cout << "2. Decrypt\n";
         cout << "3. Back\n\n";
         cout << color(PROMPT) << "> " << color(RESET);
+
+        // Captures the full line entered by the user to avoid leaving trailing newlines.
+        getline(cin, stringOption);
         
-        // Validate that the input is an integer within the permitted menu range.
-        if (cin >> option && (option >= 1 && option <= 3)) {
-            break;
-        } else {
-            cout << color(ERROR) << "\nInvalid option\n" << color(RESET);
-            cin.clear(); // Clear input error.
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore until the next newline.
+        try {
+            // Attempt to convert the string input into an integer.
+            option = stoi(stringOption);
+
+            // Validate that the input is an integer within the permitted menu range.
+            if (option >= 1 && option <= 3) {
+                break;
+            } else {
+                // Handle out-of-range numeric choices.
+                cout << color(ERROR) << "\nError: Invalid option\n" << color(RESET);
+            }
+        } catch (...) {
+            // Handle empty inputs (Enter key) or non-numeric strings intercepted by stoi.
+            cout << color(ERROR) << "\nError: You must enter a number\n" << color(RESET);
         }
     }
 
     // Return to the main menu if the user chooses to go back.
     if (option == 3) return color(MUTED) + "\nReturning to main menu..." + color(RESET);
-    
-    // Clear the trailing newline character from the menu selection.
-    cin.ignore();
     
     // Loop for requesting and validating text input.
     while (true) {
@@ -71,7 +78,7 @@ string caesar() {
         getline(cin, text);
 
         if (text.empty()) {
-            cout << color(ERROR) << "\nError: The text cannot be empty.\n" << color(RESET);
+            cout << color(ERROR) << "\nError: The text cannot be empty\n" << color(RESET);
         } else {
             break;
         }
@@ -93,12 +100,12 @@ string caesar() {
             if (shift >= 0) {
                 break; // Exit validation loop if the integer is non-negative.
             } else {
-                cout << color(ERROR) << "\nError: Enter a positive number.\n" << color(RESET);
+                cout << color(ERROR) << "\nError: Enter a positive number\n" << color(RESET);
             }
         } catch (const invalid_argument&) {
-            cout << color(ERROR) << "\nError: You must enter a valid number.\n" << color(RESET);
+            cout << color(ERROR) << "\nError: You must enter a valid number\n" << color(RESET);
         } catch (const out_of_range&) {
-            cout << color(ERROR) << "\nError: Number outside the allowed range.\n" << color(RESET);
+            cout << color(ERROR) << "\nError: Number outside the allowed range\n" << color(RESET);
         }
     }
 

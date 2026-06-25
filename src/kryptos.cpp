@@ -31,6 +31,7 @@ using namespace std;
  * and routing execution to the selected cryptographic algorithm module.
  */
 int main() {
+    string stringOption;
     int option;
 
     // Main execution loop for user interaction.
@@ -42,29 +43,40 @@ int main() {
         cout << "4. Exit\n\n";
         cout << color(PROMPT) << "> " << color(RESET);
 
-        // Validate that the input is an integer within the permitted menu range.
-        if (cin >> option && (option >= 1 && option <= 4)) {
+        // Captures the full line entered by the user to avoid leaving trailing newlines.
+        getline(cin, stringOption);
 
-            // Terminate the execution loop and close the application.
-            if (option == 4) {
-                cout << color(MUTED) << "\nEnding program...\n" << color(RESET);
-                break;
+        try {
+            // Attempt to convert the string input into an integer.
+            option = stoi(stringOption);
+
+            // Validate that the input is an integer within the permitted menu range.
+            if (option >= 1 && option <= 4) {
+
+                // Terminate the execution loop and close the application.
+                if (option == 4) {
+                    cout << color(MUTED) << "\nEnding program...\n" << color(RESET);
+                    break;
+                }
+
+                // Launch the Caesar Cipher submenu module.
+                if (option == 1) {
+                    cout << caesar() + "\n\n";
+                // Launch the Vigenère Cipher submenu module.
+                } else if (option == 2) {
+                    cout << vigenere() + "\n\n";
+                // Launch the ROT13 Cipher submenu module.
+                } else if (option == 3) {
+                    cout << rot13() + "\n\n";
+                }
+
+            } else {
+                // Handle out-of-range numeric choices.
+                cout << color(ERROR) << "\nError: Invalid option\n\n" << color(RESET);
             }
-
-            // Launch the Caesar Cipher submenu module.
-            if (option == 1) {
-                cout << caesar() + "\n\n";
-            } else if (option == 2) {
-                cout << vigenere() + "\n\n";
-            } else if (option == 3) {
-                cout << rot13() + "\n\n";
-            }
-
-        } else {
-            // Handle invalid choices or non-numeric inputs by resetting the stream.
-            cout << color(ERROR) << "\nInvalid option\n\n" << color(RESET);
-            cin.clear(); // Clear input error.
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore until the next newline.
+        } catch (...) {
+            // Handle empty inputs (Enter key) or non-numeric strings intercepted by stoi.
+            cout << color(ERROR) << "\nError: You must enter a number\n\n" << color(RESET);
         }
     }
 

@@ -40,39 +40,47 @@ string vigenereDecrypt(const string& text, const string& key);
  * @return std::string The status message or processing results.
  */
 string vigenere() {
-    string text, key;
+    string text, key, stringOption;
     int option;
 
+    // Submenu interaction loop.
     while (true) {
         cout << color(TITLE) << "\n\nSelect what you want to do:\n" << color(RESET);
         cout << "1. Encrypt\n";
         cout << "2. Decrypt\n";
         cout << "3. Back\n\n";
         cout << color(PROMPT) << "> " << color(RESET);
+
+        // Captures the full line entered by the user to avoid leaving trailing newlines.
+        getline(cin, stringOption);
         
-        // Validate that the input is an integer within the permitted menu range.
-        if (cin >> option && (option >= 1 && option <= 3)) {
-            break;
-        } else {
-            cout << color(ERROR) << "\nInvalid option\n" << color(RESET);
-            cin.clear(); // Clear input error.
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore until the next newline.
+        try {
+            // Attempt to convert the string input into an integer.
+            option = stoi(stringOption);
+
+            // Validate that the input is an integer within the permitted menu range.
+            if (option >= 1 && option <= 3) {
+                break;
+            } else {
+                // Handle out-of-range numeric choices.
+                cout << color(ERROR) << "\nError: Invalid option\n" << color(RESET);
+            }
+        } catch (...) {
+            // Handle empty inputs (Enter key) or non-numeric strings intercepted by stoi.
+            cout << color(ERROR) << "\nError: You must enter a number\n" << color(RESET);
         }
     }
 
     // Return to the main menu if the user chooses to go back.
     if (option == 3) return color(MUTED) + "\nReturning to main menu..." + color(RESET);
     
-    // Clear the trailing newline character from the menu selection.
-    cin.ignore();
-
     // Loop for requesting and validating text input.
     while (true) {
         cout << "\nEnter the text to be encrypted or decrypted: ";
         getline(cin, text);
 
         if (text.empty()) {
-            cout << color(ERROR) << "\nError: The text cannot be empty.\n" << color(RESET);
+            cout << color(ERROR) << "\nError: The text cannot be empty\n" << color(RESET);
         } else {
             break;
         }
@@ -84,7 +92,7 @@ string vigenere() {
         getline(cin, key);
     
         if (key.empty()) {
-            cout << color(ERROR) << "\nError: The key cannot be empty.\n" << color(RESET);
+            cout << color(ERROR) << "\nError: The key cannot be empty\n" << color(RESET);
             continue;
         }
     
@@ -97,7 +105,7 @@ string vigenere() {
         }
     
         if (!validKey) {
-            cout << color(ERROR) << "\nError: The key must only contain letters.\n" << color(RESET);
+            cout << color(ERROR) << "\nError: The key must only contain letters\n" << color(RESET);
         } else {
             break;
         }
