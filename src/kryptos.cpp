@@ -21,6 +21,7 @@
 #include "caesar.h"
 #include "vigenere.h"
 #include "rot13.h"
+#include "strophe.h"
 #include "colors.h"
 
 using namespace std;
@@ -40,7 +41,8 @@ int main() {
         cout << "1. Caesar\n";
         cout << "2. Vigenère\n";
         cout << "3. ROT13\n";
-        cout << "4. Exit\n\n";
+        cout << "4. Strophe (Custom Hybrid Cipher)\n";
+        cout << "5. Exit\n\n";
         cout << color(PROMPT) << "> " << color(RESET);
 
         // Captures the full line entered by the user to avoid leaving trailing newlines.
@@ -51,10 +53,10 @@ int main() {
             option = stoi(stringOption);
 
             // Validate that the input is an integer within the permitted menu range.
-            if (option >= 1 && option <= 4) {
+            if (option >= 1 && option <= 5) {
 
                 // Terminate the execution loop and close the application.
-                if (option == 4) {
+                if (option == 5) {
                     cout << color(MUTED) << "\nEnding program...\n" << color(RESET);
                     break;
                 }
@@ -68,6 +70,8 @@ int main() {
                 // Launch the ROT13 Cipher submenu module.
                 } else if (option == 3) {
                     cout << rot13() + "\n\n";
+                } else if (option == 4) {
+                    cout << strophe() + "\n\n";
                 }
 
             } else {
