@@ -5,7 +5,7 @@
  * The user can choose to either encrypt or decrypt text by providing a shift value.
  *
  * Author: Alexis Corona
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 #include <iostream>

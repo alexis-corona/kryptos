@@ -5,7 +5,7 @@
  * The ROT13 Cipher shifts each letter of the text by 13 positions.
  *
  * Author: Alexis Corona
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 #ifndef ROT13_H

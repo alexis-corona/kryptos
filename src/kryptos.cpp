@@ -12,7 +12,7 @@
  * Each option allows the user to either encrypt or decrypt a text based on their choice.
  *
  * Author: Alexis Corona
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 #include <iostream>

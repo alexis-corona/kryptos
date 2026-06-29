@@ -5,7 +5,7 @@
  * This allows the application to standardise UI highlights across all modules.
  *
  * Author: Alexis Corona
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 #ifndef COLORS_H
